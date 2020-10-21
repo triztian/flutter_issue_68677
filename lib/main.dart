@@ -39,9 +39,13 @@ class _VideoAppState extends State {
         floatingActionButton: FloatingActionButton(
           onPressed: () {
             setState(() {
-              _controller.value.isPlaying
-                  ? _controller.pause()
-                  : _controller.play();
+              if (_controller.value.isPlaying) {
+                _controller.pause();
+                return;
+              }
+
+              _controller.seekTo(Duration.zero);
+              _controller.play();
             });
           },
           child: Icon(
